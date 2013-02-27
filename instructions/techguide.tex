@@ -16,6 +16,7 @@
 \usepackage{multirow,booktabs,array}
 \usepackage{listings}
 \usepackage{color}
+\usepackage[T1]{fontenc}
 				
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
@@ -174,7 +175,6 @@ Before working on your own entries, you should update to the latest version.
 
 This should merge changes to \code{picsl.bib} made by others. Now you can edit \code{picsl.bib} in Jabref.
 
-
 \section{Jabref}
 
 Jabref is hosted at Sourceforge and therefore blocked by the UPHS firewall. Version 2.9.2 may be obtained from
@@ -193,9 +193,7 @@ Under Preferences, change the following settings:
 \item Under ``BibTeX key generator", set \code{Default pattern} to \code{[auth][year][journal:abbr]}.
 \end{itemize}
 
-Next, add the list of journal abbreviations. A text file \code{medline_journal_abbr.txt} is included in the picslbib repository. This includes abbreviations for all journals and conferences indexed in Medline. Go to the Options menu and select Manage journal abbreviations. Under External files, click Browse and select \code{medline_journal_abbr.txt}.
-
-
+Next, add the list of journal abbreviations. A text file \code{medline\_journal\_abbr.txt} is included in the picslbib repository. This includes abbreviations for all journals and conferences indexed in Medline. Go to the Options menu and select Manage journal abbreviations. Under External files, click Browse and select \code{medline\_journal\_abbr.txt}.
 
 \section{Uploading the bibliography to the website}
 
@@ -216,7 +214,7 @@ First, update the repository.
 Git only commits modifications when told to do so
 \begin{lstlisting}[style=bash]
   $ git add picsl.bib
-  $ git commit -m "Changes made by $user" 
+  $ git commit -m "Adding NeuroImage paper" 
 \end{lstlisting}
 
 You can commit multiple times, the changes won't be pushed to the remote repository until you push them:
@@ -230,6 +228,17 @@ To update the website right away, there is a script on bigmac that will upload a
 \begin{lstlisting}[style=bash]
   $ /home/pcook/bin/bin/uploadBibtex.sh picsl.bib
 \end{lstlisting}
+
+
+\section{Citations on the website}
+
+To cite an article on the site, add the following text to the post or page:
+\begin{lstlisting}
+  [bibtex file=picsl.bib key=BibTexKey]
+\end{lstlisting}
+where \code{BibTexKey} is the Bibtex key of the entry you wish to cite.
+
+This functionality is provided by the PaperCite Wordpress plugin, please see its documentation for other capabilities.
 
 \bibliographystyle{plain}
 \bibliography{../picsl.bib}

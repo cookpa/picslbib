@@ -16,6 +16,7 @@
 \usepackage{multirow,booktabs,array}
 \usepackage{listings}
 \usepackage{color}
+\usepackage[T1]{fontenc}
 				
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
@@ -78,7 +79,7 @@ colorlinks,linkcolor={blue},citecolor={blue},urlcolor={blue},
 
 % The title should be descriptive enough for people to be able to find
 % the relevant document. 
-\title{PICSL lab bibliography style and technical instructions}
+\title{PICSL lab bibliography style instructions}
 
 % 
 % NOTE: This is the last number of the "handle" URL that 
@@ -134,7 +135,7 @@ colorlinks,linkcolor={blue},citecolor={blue},urlcolor={blue},
 % The abstract should be a paragraph or two long, and describe the
 % scope of the document.
 \begin{abstract}
-\noindent This document explains how to update the lab master bibliography and website.
+\noindent This document contains style instructions for adding publications to the lab bibliography.
 \end{abstract}
 
 \tableofcontents
@@ -142,112 +143,45 @@ colorlinks,linkcolor={blue},citecolor={blue},urlcolor={blue},
 
 \section{Introduction}
 
-We maintain a lab-wide Bibtex file for multiple uses, including updating the website but also for grant applications and departmental reporting requirements. Each member of the lab needs to contribute their own publications to the bibliography, and we must all use a consistent system to avoid divergence in citation style.
+This style guide must be followed to ensure that the lab bibliography maintains a consistent look and feel. For technical instructions on how to configure Jabref and upload references, see \code{techguide.pdf}.
 
-\subsection{Setup}
+\section{Adding new publications}
 
-To get started, perform the following one-time setup steps.
-
-\begin{enumerate}
-\item Register for a free GitHub account, and email your username to Phil
-\item Install Jabref 2.9.2 for your platform (see section on Jabref below)
-\end{enumerate}
-
-
-\section{The Git repository}
-
-The picslbib Git repository contains the Bibtex and this document. You may clone via https or ssh, depending on how your Git is configured. To clone via https, do
-\begin{lstlisting}[style=bash]
-  $ git clone https://github.com/cookpa/picslbib.git
-\end{lstlisting}
-
-You only need to clone once, thereafter you can merge updates made by others. 
-
-
-\subsection{Updating your repository}
-
-Before working on your own entries, you should update to the latest version.
-\begin{lstlisting}[style=bash]
-  $ git fetch
-  $ git merge origin/master
-\end{lstlisting}
-
-This should merge changes to \code{picsl.bib} made by others. Now you can edit \code{picsl.bib} in Jabref.
-
-
-\section{Jabref}
-
-Jabref is hosted at Sourceforge and therefore blocked by the UPHS firewall. Version 2.9.2 may be obtained from
-\begin{lstlisting}[style=bash]
-  /mnt/build/pcook/jabref
-\end{lstlisting}
-The JAR version is multi-platform, there are also install packages for Windows and Mac OS.
-
-\subsection{Jabref settings}
-
-The first time you run Jabref, a few settings need to be changed.
-
-Under Preferences, change the following settings:
-\begin{itemize}
-\item Under ``File", set \code{Store the following fields with braces around capital letters} to \code{title;journal;institution;booktitle}.
-\item Under ``BibTeX key generator", set \code{Default pattern} to \code{[auth][year][journal:abbr]}.
-\end{itemize}
-
-Next, add the list of journal abbreviations. A text file \code{medline_journal_abbr.txt} is included in the picslbib repository. This includes abbreviations for all journals and conferences indexed in Medline. Go to the Options menu and select Manage journal abbreviations. Under External files, click Browse and select \code{medline_journal_abbr.txt}.
-
-
-\subsection{Adding new publications}
-
-Editing the bibliography consists mostly of adding new papers. For published papers, use Jabref's web search. Use the drop down box to change the search source. If the journal or conference is listed on Pubmed, search Medline. For IEEE journals not on Medline, search with IEEEXplore. Do not use Google Scholar because the Bibtex can be inconsistent.
+Editing the bibliography consists mostly of adding new papers. For published papers, use Jabref's web search. Use the drop down box to change the search source. If the journal or conference is listed on Pubmed, search Medline. For IEEE journals not on Medline, search with IEEEXplore. Do not use Google Scholar because the Bibtex is automatically generated and can be inconsistent.
 
 Each article only needs to be added once. If your search returns articles already in the database, these articles will be highlighted with a ``D". Do not import duplicates.
 
 
-\subsection{Adding in press articles}
+\section{Adding in press articles}
 
 We need to figure out a system for this that doesn't end up with a bunch of outdated or wrongly-keyed entries.
 
 %To add a publication that is accepted but not yet published, you will need to add an entry by hand. To do this, you should copy an existing entry from the same journal or conference. Edit the ``year" field to say ``In press", leave volume and pages blank. This is not valid Bibtex but it will render acceptably on the website.
 
-\subsection{Unlisted publications}
+\section{Unlisted publications}
 
-Many conferences are not listed in Medline or IEEEXplore.  We define our own standards and provide example Bibtex in \code{unlistedpublications.tex}.
+Many conferences are not listed in Medline or IEEEXplore.  We define our own standards and provide example Bibtex in the following sections. New conferences and journals can be added as necessary. 
 
-\section{Uploading the bibliography to the website}
+\subsection{ISMRM}
 
-First, update the repository.
-
-\begin{lstlisting}[style=bash]
-  $ git status
-  # On branch master
-  # Changes not staged for commit:
-  #   (use "git add <file>..." to update what will be committed)
-  #   (use "git checkout -- <file>..." to discard changes in working directory)
-  #
-  #	modified:   picsl.bib
-  #
-  no changes added to commit (use "git add" and/or "git commit -a")
+This style follows the ISMRM's citation database in PubMed format. 
+\begin{lstlisting}[language=TeX]
+@INPROCEEDINGS{AuthorYear,
+  author = {Author, A. and AnotherAuthor, B.},
+  title = {Abstract title},
+  booktitle = {Proceedings Nth Scientific Meeting, International Society for Magnetic
+	Resonance in Medicine, City},
+  year = {YYYY},
+  pages = {Abstract number goes here},
+  abstract = {The short abstract provided for the ISMRM abstract index},
+  keywords = {CityAbstractNumber},
+  timestamp = {YYYY.MM.DD}
+}
 \end{lstlisting}
 
-Git only commits modifications when told to do so
-\begin{lstlisting}[style=bash]
-  $ git add picsl.bib
-  $ git commit -m "Changes made by $user" 
-\end{lstlisting}
 
-You can commit multiple times, the changes won't be pushed to the remote repository until you push them:
-\begin{lstlisting}[style=bash]
-  $ git push origin master 
-\end{lstlisting}
 
-The website updates the bibliography from the Git repository nightly.
-
-To update the website right away, there is a script on bigmac that will upload a file for you.
-\begin{lstlisting}[style=bash]
-  $ /home/pcook/bin/bin/uploadBibtex.sh picsl.bib
-\end{lstlisting}
-
-\bibliographystyle{plain}
+\bibliographystyle{ieee}
 \bibliography{../picsl.bib}
 
 

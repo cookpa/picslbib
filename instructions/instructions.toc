@@ -1,2 +1,0 @@
-\contentsline {subsection}{\numberline {0.1}Setup}{2}{subsection.0.1}
-\contentsline {section}{\numberline {1}The Git repository}{2}{section.1}
