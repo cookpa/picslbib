@@ -1,0 +1,255 @@
+%
+% Complete documentation on the extended LaTeX markup used for Insight
+% documentation is available in ``Documenting Insight'', which is part
+% of the standard documentation for Insight.  It may be found online
+% at:
+%
+%     http://www.itk.org/
+
+\documentclass{InsightArticle}
+
+\usepackage[dvips]{graphicx}
+%\usepackage{listing}						
+\usepackage{listings}	
+\usepackage{wrapfig}
+\usepackage{amssymb,amsmath}
+\usepackage{multirow,booktabs,array}
+\usepackage{listings}
+\usepackage{color}
+				
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%  hyperref should be the last package to be loaded.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[
+bookmarks,
+bookmarksopen,
+backref,
+colorlinks,linkcolor={blue},citecolor={blue},urlcolor={blue},
+]{hyperref}
+
+
+
+
+\graphicspath{{./figures/}}
+
+
+ 
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{ %
+  language=bash,                % the language of the code
+  basicstyle=\footnotesize,           % the size of the fonts that are used for the code
+  numbers=left,                   % where to put the line-numbers
+  numberstyle=\tiny\color{gray},  % the style that is used for the line-numbers
+  stepnumber=2,                   % the step between two line-numbers. If it's 1, each line 
+                                  % will be numbered
+  numbersep=5pt,                  % how far the line-numbers are from the code
+  backgroundcolor=\color{white},      % choose the background color. You must add \usepackage{color}
+  showspaces=false,               % show spaces adding particular underscores
+  showstringspaces=false,         % underline spaces within strings
+  showtabs=false,                 % show tabs within strings adding particular underscores
+  frame=single,                   % adds a frame around the code
+  rulecolor=\color{black},        % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. commens (green here))
+  tabsize=2,                      % sets default tabsize to 2 spaces
+  captionpos=b,                   % sets the caption-position to bottom
+  breaklines=true,                % sets automatic line breaking
+  breakatwhitespace=true,        % sets if automatic breaks should only happen at whitespace
+  prebreak=\textbackslash, breakindent=7pt,
+  title=\lstname,                   % show the filename of files included with \lstinputlisting;
+                                  % also try caption instead of title
+  keywordstyle=\color{blue},          % keyword style
+  commentstyle=\color{dkgreen},       % comment style
+  stringstyle=\color{mauve},         % string literal style
+  escapeinside={\%*}{*)},            % if you want to add a comment within your code
+  morekeywords={*,...}               % if you want to add more keywords to the set
+}
+
+\lstdefinestyle{bash}{language=bash} 
+\lstdefinestyle{perl}{language=perl}
+\lstdefinestyle{bibtex}{language=bibtex}
+ 
+
+%  This is a template for Papers to the Insight Journal. 
+%  It is comparable to a technical report format.
+
+% The title should be descriptive enough for people to be able to find
+% the relevant document. 
+\title{PICSL lab bibliography style and technical instructions}
+
+% 
+% NOTE: This is the last number of the "handle" URL that 
+% The Insight Journal assigns to your paper as part of the
+% submission process. Please replace the number "1338" with
+% the actual handle number that you get assigned.
+%
+%\newcommand{\IJhandlerIDnumber}{}
+
+% Increment the release number whenever significant changes are made.
+% The author and/or editor can define 'significant' however they like.
+\release{0.1}
+
+% At minimum, give your name and an email address.  You can include a
+% snail-mail address if you like.
+%\author{}
+%\authoraddress{Penn Image Computing And Science Laboratory\\
+%University of Pennsylvania}
+
+\begin{document}
+
+%
+% Add hyperlink to the web location and license of the paper.
+% The argument of this command is the handler identifier given
+% by the Insight Journal to this paper.
+% 
+%\IJhandlefooter{\IJhandlerIDnumber}
+
+
+\ifpdf
+\else
+   %
+   % Commands for including Graphics when using latex
+   % 
+   \DeclareGraphicsExtensions{.eps,.jpg,.gif,.tiff,.bmp,.png}
+   \DeclareGraphicsRule{.jpg}{eps}{.jpg.bb}{`convert #1 eps:-}
+   \DeclareGraphicsRule{.gif}{eps}{.gif.bb}{`convert #1 eps:-}
+   \DeclareGraphicsRule{.tiff}{eps}{.tiff.bb}{`convert #1 eps:-}
+   \DeclareGraphicsRule{.bmp}{eps}{.bmp.bb}{`convert #1 eps:-}
+   \DeclareGraphicsRule{.png}{eps}{.png.bb}{`convert #1 eps:-}
+\fi
+
+
+\maketitle
+
+
+\ifhtml
+\chapter*{Front Matter\label{front}}
+\fi
+
+
+
+% The abstract should be a paragraph or two long, and describe the
+% scope of the document.
+\begin{abstract}
+\noindent This document explains how to update the lab master bibliography and website.
+\end{abstract}
+
+\tableofcontents
+\newpage
+
+\section{Introduction}
+
+We maintain a lab-wide Bibtex file for multiple uses, including updating the website but also for grant applications and departmental reporting requirements. Each member of the lab needs to contribute their own publications to the bibliography, and we must all use a consistent system to avoid divergence in citation style.
+
+\subsection{Setup}
+
+To get started, perform the following one-time setup steps.
+
+\begin{enumerate}
+\item Register for a free GitHub account, and email your username to Phil
+\item Install Jabref 2.9.2 for your platform (see section on Jabref below)
+\end{enumerate}
+
+
+\section{The Git repository}
+
+The picslbib Git repository contains the Bibtex and this document. You may clone via https or ssh, depending on how your Git is configured. To clone via https, do
+\begin{lstlisting}[style=bash]
+  $ git clone https://github.com/cookpa/picslbib.git
+\end{lstlisting}
+
+You only need to clone once, thereafter you can merge updates made by others. 
+
+
+\subsection{Updating your repository}
+
+Before working on your own entries, you should update to the latest version.
+\begin{lstlisting}[style=bash]
+  $ git fetch
+  $ git merge origin/master
+\end{lstlisting}
+
+This should merge changes to \code{picsl.bib} made by others. Now you can edit \code{picsl.bib} in Jabref.
+
+
+\section{Jabref}
+
+Jabref is hosted at Sourceforge and therefore blocked by the UPHS firewall. Version 2.9.2 may be obtained from
+\begin{lstlisting}[style=bash]
+  /mnt/build/pcook/jabref
+\end{lstlisting}
+The JAR version is multi-platform, there are also install packages for Windows and Mac OS.
+
+\subsection{Jabref settings}
+
+The first time you run Jabref, a few settings need to be changed.
+
+Under Preferences, change the following settings:
+\begin{itemize}
+\item Under ``File", set \code{Store the following fields with braces around capital letters} to \code{title;journal;institution;booktitle}.
+\item Under ``BibTeX key generator", set \code{Default pattern} to \code{[auth][year][journal:abbr]}.
+\end{itemize}
+
+Next, add the list of journal abbreviations. A text file \code{medline_journal_abbr.txt} is included in the picslbib repository. This includes abbreviations for all journals and conferences indexed in Medline. Go to the Options menu and select Manage journal abbreviations. Under External files, click Browse and select \code{medline_journal_abbr.txt}.
+
+
+\subsection{Adding new publications}
+
+Editing the bibliography consists mostly of adding new papers. For published papers, use Jabref's web search. Use the drop down box to change the search source. If the journal or conference is listed on Pubmed, search Medline. For IEEE journals not on Medline, search with IEEEXplore. Do not use Google Scholar because the Bibtex can be inconsistent.
+
+Each article only needs to be added once. If your search returns articles already in the database, these articles will be highlighted with a ``D". Do not import duplicates.
+
+
+\subsection{Adding in press articles}
+
+We need to figure out a system for this that doesn't end up with a bunch of outdated or wrongly-keyed entries.
+
+%To add a publication that is accepted but not yet published, you will need to add an entry by hand. To do this, you should copy an existing entry from the same journal or conference. Edit the ``year" field to say ``In press", leave volume and pages blank. This is not valid Bibtex but it will render acceptably on the website.
+
+\subsection{Unlisted publications}
+
+Many conferences are not listed in Medline or IEEEXplore.  We define our own standards and provide example Bibtex in \code{unlistedpublications.tex}.
+
+\section{Uploading the bibliography to the website}
+
+First, update the repository.
+
+\begin{lstlisting}[style=bash]
+  $ git status
+  # On branch master
+  # Changes not staged for commit:
+  #   (use "git add <file>..." to update what will be committed)
+  #   (use "git checkout -- <file>..." to discard changes in working directory)
+  #
+  #	modified:   picsl.bib
+  #
+  no changes added to commit (use "git add" and/or "git commit -a")
+\end{lstlisting}
+
+Git only commits modifications when told to do so
+\begin{lstlisting}[style=bash]
+  $ git add picsl.bib
+  $ git commit -m "Changes made by $user" 
+\end{lstlisting}
+
+You can commit multiple times, the changes won't be pushed to the remote repository until you push them:
+\begin{lstlisting}[style=bash]
+  $ git push origin master 
+\end{lstlisting}
+
+The website updates the bibliography from the Git repository nightly.
+
+To update the website right away, there is a script on bigmac that will upload a file for you.
+\begin{lstlisting}[style=bash]
+  $ /home/pcook/bin/bin/uploadBibtex.sh picsl.bib
+\end{lstlisting}
+
+\bibliographystyle{plain}
+\bibliography{../picsl.bib}
+
+
+\end{document}
+

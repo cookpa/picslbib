@@ -78,7 +78,7 @@ colorlinks,linkcolor={blue},citecolor={blue},urlcolor={blue},
 
 % The title should be descriptive enough for people to be able to find
 % the relevant document. 
-\title{PICSL lab bibliography style and technical instructions}
+\title{PICSL lab bibliography technical instructions}
 
 % 
 % NOTE: This is the last number of the "handle" URL that 
@@ -94,9 +94,9 @@ colorlinks,linkcolor={blue},citecolor={blue},urlcolor={blue},
 
 % At minimum, give your name and an email address.  You can include a
 % snail-mail address if you like.
-\author{Philip Cook, Ben Kandel, John Wu}
-\authoraddress{Penn Image Computing And Science Laboratory\\
-University of Pennsylvania}
+%\author{}
+%\authoraddress{Penn Image Computing And Science Laboratory\\
+%University of Pennsylvania}
 
 \begin{document}
 
@@ -140,7 +140,7 @@ University of Pennsylvania}
 \tableofcontents
 \newpage
 
-\section*{Introduction}
+\section{Introduction}
 
 We maintain a lab-wide Bibtex file for multiple uses, including updating the website but also for grant applications and departmental reporting requirements. Each member of the lab needs to contribute their own publications to the bibliography, and we must all use a consistent system to avoid divergence in citation style.
 
@@ -157,16 +157,79 @@ To get started, perform the following one-time setup steps.
 \section{The Git repository}
 
 The picslbib Git repository contains the Bibtex and this document. You may clone via https or ssh, depending on how your Git is configured. To clone via https, do
-
 \begin{lstlisting}[style=bash]
-
   $ git clone https://github.com/cookpa/picslbib.git
-
-  
-
 \end{lstlisting}
 
+You only need to clone once, thereafter you can merge updates made by others. 
 
+
+\subsection{Updating your repository}
+
+Before working on your own entries, you should update to the latest version.
+\begin{lstlisting}[style=bash]
+  $ git fetch
+  $ git merge origin/master
+\end{lstlisting}
+
+This should merge changes to \code{picsl.bib} made by others. Now you can edit \code{picsl.bib} in Jabref.
+
+
+\section{Jabref}
+
+Jabref is hosted at Sourceforge and therefore blocked by the UPHS firewall. Version 2.9.2 may be obtained from
+\begin{lstlisting}[style=bash]
+  /mnt/build/pcook/jabref
+\end{lstlisting}
+The JAR version is multi-platform, there are also install packages for Windows and Mac OS.
+
+\subsection{Jabref settings}
+
+The first time you run Jabref, a few settings need to be changed.
+
+Under Preferences, change the following settings:
+\begin{itemize}
+\item Under ``File", set \code{Store the following fields with braces around capital letters} to \code{title;journal;institution;booktitle}.
+\item Under ``BibTeX key generator", set \code{Default pattern} to \code{[auth][year][journal:abbr]}.
+\end{itemize}
+
+Next, add the list of journal abbreviations. A text file \code{medline_journal_abbr.txt} is included in the picslbib repository. This includes abbreviations for all journals and conferences indexed in Medline. Go to the Options menu and select Manage journal abbreviations. Under External files, click Browse and select \code{medline_journal_abbr.txt}.
+
+
+
+\section{Uploading the bibliography to the website}
+
+First, update the repository.
+
+\begin{lstlisting}[style=bash]
+  $ git status
+  # On branch master
+  # Changes not staged for commit:
+  #   (use "git add <file>..." to update what will be committed)
+  #   (use "git checkout -- <file>..." to discard changes in working directory)
+  #
+  #	modified:   picsl.bib
+  #
+  no changes added to commit (use "git add" and/or "git commit -a")
+\end{lstlisting}
+
+Git only commits modifications when told to do so
+\begin{lstlisting}[style=bash]
+  $ git add picsl.bib
+  $ git commit -m "Changes made by $user" 
+\end{lstlisting}
+
+You can commit multiple times, the changes won't be pushed to the remote repository until you push them:
+\begin{lstlisting}[style=bash]
+  $ git push origin master 
+\end{lstlisting}
+
+The website updates the bibliography from the Git repository nightly.
+
+To update the website right away, there is a script on bigmac that will upload a file for you.
+\begin{lstlisting}[style=bash]
+  $ /home/pcook/bin/bin/uploadBibtex.sh picsl.bib
+\end{lstlisting}
 
 \bibliographystyle{plain}
 \bibliography{../picsl.bib}
