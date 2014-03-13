@@ -195,6 +195,11 @@ Under Preferences, change the following settings:
 
 Next, add the list of journal abbreviations. A text file \code{medline\_journal\_abbr.txt} is included in the picslbib repository. This includes abbreviations for all journals and conferences indexed in Medline. Go to the Options menu and select Manage journal abbreviations. Under External files, click Browse and select \code{medline\_journal\_abbr.txt}.
 
+\subsection{Testing entries}
+
+Jabref does very limited error checking at entry. To test the citations further, you can compile \code{citeReferences.tex}. This is configured to cite everything in the bibliography. You will be able to see any Bibtex errors and check that your citations render correctly.
+
+
 \section{Uploading the bibliography to the website}
 
 First, update the repository.
@@ -261,6 +266,7 @@ If you want to cite papers inline with text, use the \code{bibshow} and \code{bi
   References
   [/bibshow]
 \end{lstlisting}
+
 
 \bibliographystyle{plain}
 \bibliography{../picsl.bib}
