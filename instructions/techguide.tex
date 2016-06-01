@@ -91,7 +91,7 @@ colorlinks,linkcolor={blue},citecolor={blue},urlcolor={blue},
 
 % Increment the release number whenever significant changes are made.
 % The author and/or editor can define 'significant' however they like.
-\release{0.1}
+\release{0.2}
 
 % At minimum, give your name and an email address.  You can include a
 % snail-mail address if you like.
@@ -143,7 +143,7 @@ colorlinks,linkcolor={blue},citecolor={blue},urlcolor={blue},
 
 \section{Introduction}
 
-We maintain a lab-wide Bibtex file for multiple uses, including updating the website but also for grant applications and departmental reporting requirements. Each member of the lab needs to contribute their own publications to the bibliography, and we must all use a consistent system to avoid divergence in citation style.
+For the lab website, everyone needs to contribute their own publications to the bibliography, and we must all use a consistent system to avoid divergence in citation style.
 
 \subsection{Setup}
 
@@ -151,18 +151,14 @@ To get started, perform the following one-time setup steps.
 
 \begin{enumerate}
 \item Register for a free GitHub account, and email your username to Phil
-\item Install Jabref 2.9.2 for your platform (see section on Jabref below)
+\item Install Jabref 2.9.2 for your platform, or use the one on the cluster (see section on Jabref below)
 \end{enumerate}
 
 
 \section{The Git repository}
 
-The picslbib Git repository contains the Bibtex and this document. You may clone via https or ssh, depending on how your Git is configured. To clone via https, do
-\begin{lstlisting}[style=bash]
-  $ git clone https://github.com/cookpa/picslbib.git
-\end{lstlisting}
+The picslbib Git repository contains the Bibtex and this document. To clone it, go to Github and click "Clone or download", and clone via SSH or https as you prefer.
 
-You only need to clone once, thereafter you can merge updates made by others. 
 
 
 \subsection{Updating your repository}
@@ -177,11 +173,11 @@ This should merge changes to \code{picsl.bib} made by others. Now you can edit \
 
 \section{Jabref}
 
-Jabref is hosted at Sourceforge and therefore blocked by the UPHS firewall. Version 2.9.2 may be obtained from
+Jabref is hosted at Sourceforge and therefore blocked by the UPHS firewall. You can download with a laptop connected to AirPennNet, or run the copy on the CFN cluster:
 \begin{lstlisting}[style=bash]
-  /mnt/build/pcook/jabref
+  /data/jet/pcook/bin/jabref/jabref 
 \end{lstlisting}
-The JAR version is multi-platform, there are also install packages for Windows and Mac OS.
+The JAR version is multi-platform, so you can copy this to your machine. There are also install packages for Windows and Mac OS on SourceForge.
 
 \subsection{Jabref settings}
 
@@ -227,12 +223,7 @@ You can commit multiple times, the changes won't be pushed to the remote reposit
   $ git push origin master 
 \end{lstlisting}
 
-The website updates the bibliography from the Git repository nightly.
-
-To update the website right away, there is a script on bigmac that will upload a file for you.
-\begin{lstlisting}[style=bash]
-  $ /home/pcook/bin/bin/uploadBibtex.sh picsl.bib
-\end{lstlisting}
+The website updates the bibliography from the Git repository nightly, so citations won't be visible right away.
 
 
 \section{Citations on the website}
@@ -247,7 +238,9 @@ This functionality is provided by the PaperCite Wordpress plugin.
 
 \subsection{Listing your own papers for your personal page}
 
-In Jabref, search for your name using the "Filter" option. If this doesn't isolate your papers, you can make the search case sensitive, or use regular expressions. When you've isolated your papers, sort them by ``Entrytype" if you want to separate proceedings from articles. Then right click on a bunch of papers, and select ``Copy BibTex key". It will copy a comma separated list of keys to the clipboard. On the site, simply paste these into a papercite call:
+You can either cite select publications by hand, or get a list of all your publications.
+
+To get the complete list, in Jabref, search for your name using the "Filter" option. If this doesn't isolate your papers, you can make the search case sensitive, or use regular expressions. When you've isolated your papers, sort them by ``Entrytype" if you want to separate proceedings from articles. Then right click on a bunch of papers, and select ``Copy BibTex key". It will copy a comma separated list of keys to the clipboard. On the site, simply paste these into a papercite call:
 \begin{lstlisting}
   [bibtex file=picsl.bib key=Key1,Key2,Key3 sort=year order=desc]
 \end{lstlisting}
