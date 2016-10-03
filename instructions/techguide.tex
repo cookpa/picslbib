@@ -91,7 +91,7 @@ colorlinks,linkcolor={blue},citecolor={blue},urlcolor={blue},
 
 % Increment the release number whenever significant changes are made.
 % The author and/or editor can define 'significant' however they like.
-\release{0.2}
+\release{0.3}
 
 % At minimum, give your name and an email address.  You can include a
 % snail-mail address if you like.
@@ -151,14 +151,13 @@ To get started, perform the following one-time setup steps.
 
 \begin{enumerate}
 \item Register for a free GitHub account, and email your username to Phil
-\item Install Jabref 2.9.2 for your platform, or use the one on the cluster (see section on Jabref below)
+\item Install Jabref 3.6 for your platform, or use the one on the cluster (see section on Jabref below)
 \end{enumerate}
 
 
 \section{The Git repository}
 
 The picslbib Git repository contains the Bibtex and this document. To clone it, go to Github and click "Clone or download", and clone via SSH or https as you prefer.
-
 
 
 \subsection{Updating your repository}
@@ -173,10 +172,8 @@ This should merge changes to \code{picsl.bib} made by others. Now you can edit \
 
 \section{Jabref}
 
-Jabref is hosted at Sourceforge and therefore blocked by the UPHS firewall. You can download with a laptop connected to AirPennNet, or run the copy on the CFN cluster:
-\begin{lstlisting}[style=bash]
-  /data/jet/pcook/bin/jabref/jabref 
-\end{lstlisting}
+Jabref is hosted at Sourceforge and therefore blocked by the UPHS firewall. You can download by connecting to AirPennNet.
+
 The JAR version is multi-platform, so you can copy this to your machine. There are also install packages for Windows and Mac OS on SourceForge.
 
 \subsection{Jabref settings}
@@ -185,11 +182,13 @@ The first time you run Jabref, a few settings need to be changed.
 
 Under Preferences, change the following settings:
 \begin{itemize}
-\item Under ``File", set \code{Store the following fields with braces around capital letters} to \code{title;journal;institution;booktitle}.
-\item Under ``BibTeX key generator", set \code{Default pattern} to \code{[auth][year][journal:abbr]}.
+\item Under ``BibTeX key generator", set \code{Default pattern} to \code{[auth][year][journal:abbr:upper]}.
 \end{itemize}
 
-Next, add the list of journal abbreviations. A text file \code{medline\_journal\_abbr.txt} is included in the picslbib repository. This includes abbreviations for all journals and conferences indexed in Medline. Go to the Options menu and select Manage journal abbreviations. Under External files, click Browse and select \code{medline\_journal\_abbr.txt}.
+
+\subsection{Importing entries}
+
+Under Search, click Web Search, and search for your name. There appears to be an upper limit on the number of entries you can get, so be specific. Eg, ``Cook PA 2015". Beware of duplicate entries. Jabref will warn but only if the Bibtex key is identical (this is case sensitive).
 
 \subsection{Testing entries}
 
